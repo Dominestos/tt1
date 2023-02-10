@@ -12,7 +12,7 @@ class Crud
     public string $email = '';
     public string $userName = '';
 
-    public function __construct(string $login, string $password, string $passconfirm, string $email, string $userName)
+    public function __construct(string $login, string $password, string $passconfirm = '', string $email = '', string $userName = '')
     {
         $this->login = $login;
         $this->password = $password;

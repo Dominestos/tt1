@@ -2,7 +2,7 @@ $(document).ready(function(){
     var regForm = $('form#register');
     var authForm = $('form#authorize');
     var main = $('form.main');
-    var session = $('#session');
+    // var session = $('h1#session');
 
     authForm.hide();
     main.hide();
@@ -81,17 +81,17 @@ $(document).ready(function(){
                 dataType: 'html',
                 data: regData,
                 success: function(data){
-                    let rdata = JSON.parse(data);
+                    let cdata = JSON.parse(data);
 
-                    if (rdata.status === true) {
+                    if (cdata.status === true) {
                         regForm.hide();
                         authForm.hide();
                         main.show();
-                    } else if (rdata.status === false) {
-                        if (rdata.message == "User login exists"){
+                    } else if (cdata.status === false) {
+                        if (cdata.message == "User login exists"){
                             $('input#login').css("border", "2px solid red");
                             $('label[for="login"]').html("<label for='login'>Пользователь с таким логином уже существует</label>");
-                        } else if (rdata.message == 'User email exists'){
+                        } else if (cdata.message == 'User email exists'){
                             $('input#email').css("border", "2px solid red");
                             $('label[for="email"]').html("<label for='email'>Пользователь с таким email уже существует</label>");
                         } else {
@@ -111,10 +111,7 @@ $(document).ready(function(){
         let authLogin = $('input[name="authLogin"]').val();
         let authPassword = $('input[name="authPassword"]').val();
 
-        
-
         let authData = authForm.serialize();
-
 
         $.ajax({
             url: '/auth.php',
