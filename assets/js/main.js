@@ -2,10 +2,17 @@ $(document).ready(function(){
     var regForm = $('form#register');
     var authForm = $('form#authorize');
     var main = $('form.main');
-    // var session = $('h1#session');
-
-    authForm.hide();
-    main.hide();
+    var selector = document.querySelector('#session').innerHTML;
+    
+    if (selector !== 'Hello '){
+        regForm.hide();
+        authForm.hide();
+        main.show();
+    } else {
+        regForm.show();
+        authForm.hide();
+        main.hide();
+    }
 
     $('a.reg').click(function(event) {
         event.preventDefault();
@@ -87,6 +94,7 @@ $(document).ready(function(){
                         regForm.hide();
                         authForm.hide();
                         main.show();
+                        $('#session').html("<h1 style='margin: 10%;' id='session'>Hello <span id='session'>" + cdata.message + "</span></h1>");
                     } else if (cdata.status === false) {
                         if (cdata.message == "User login exists"){
                             $('input#login').css("border", "2px solid red");
@@ -123,9 +131,11 @@ $(document).ready(function(){
                 let rdata = JSON.parse(data);
 
                 if(rdata.status === true){
+
                     regForm.hide();
                     authForm.hide();
                     main.show();
+                    $('#session').html("<h1 style='margin: 10%;' id='session'>Hello <span id='session'>" + rdata.message + "</span></h1>");
                 }else{
                     if(rdata.message === 'Wrong login'){
                         $('input#authLogin').css("border", "2px solid red");

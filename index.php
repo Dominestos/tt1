@@ -59,7 +59,7 @@ session_start();
     </form>
 
     <form class="main">
-        <h1 style="margin: 10%;" id="session"><?=$_SESSION['name'] ?></h2>
+        <h1 style="margin: 10%;" id="session">Hello <?=isset($_SESSION['name']) ? $_SESSION['name'] : ''?></h1>
         <a href="/exit.php" class="logout">Выход</a>
     </form>
 

@@ -14,17 +14,17 @@ try {
 
         if (isset($_COOKIE['name'])) {
             setcookie('name', $_COOKIE['name'], time() + 60 * 60 * 24 * 30, '/');
-            $_SESSION['name'] = 'Hello ' . $_COOKIE['name'];
+            $_SESSION['name'] = $_COOKIE['name'];
         } else {
             $username = $readUser->getUserName();
             setcookie('name', $username, time() + 60 * 60 * 24 * 30, '/');
-            $_SESSION['name'] = 'Hello ' . $username;
+            $_SESSION['name'] = $username;
         }
     }
     
     echo json_encode([
         "status" => true,
-        "message" => '',
+        "message" => $readUser->getUserName(),
     ]);
 
 } catch (Exception $exception) {
