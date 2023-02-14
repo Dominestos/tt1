@@ -1,16 +1,21 @@
 $(document).ready(function(){
+    $('form#register').hide();
+    $('form#authorize').hide();
+    $('form.main').hide();
     var regForm = $('form#register');
     var authForm = $('form#authorize');
     var main = $('form.main');
     var selector = document.querySelector('#session').innerHTML;
+
+
     
     if (selector !== 'Hello '){
         regForm.hide();
         authForm.hide();
         main.show();
     } else {
-        regForm.show();
-        authForm.hide();
+        regForm.hide();
+        authForm.show();
         main.hide();
     }
 
