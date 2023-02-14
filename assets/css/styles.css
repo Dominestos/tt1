@@ -69,3 +69,7 @@ form a {
 form a:hover {
     color: #0fc3f5;
 }
+
+.redErr {
+    color:rgb(255, 0, 0);
+}

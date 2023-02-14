@@ -43,7 +43,7 @@ $(document).ready(function(){
             $('label[for="login"]').html("<label for='login'></label>");
         }else{
             $('input#login').css("border", "2px solid red");
-            $('label[for="login"]').html("<label for='login'>Логин должен состоять минимум из 6 символов</label>");
+            $('label[for="login"]').html("<label for='login' class='redErr'>Логин должен состоять минимум из 6 символов</label>");
         }
 
         if(passValidate(password)){
@@ -51,7 +51,7 @@ $(document).ready(function(){
             $('label[for="password"]').html("<label for='password'></label>");
         }else{
             $('input#password').css("border", "2px solid red");
-            $('label[for="password"]').html("<label for='password'>Пароль должен содержать цифры, строчные и прописные буквы, минимум 6 символов</label>");
+            $('label[for="password"]').html("<label for='password' class='redErr'>Пароль должен содержать цифры, строчные и прописные буквы, минимум 6 символов</label>");
         }
 
         if(passConfirmValidate(password, passConfirm)){
@@ -59,7 +59,7 @@ $(document).ready(function(){
             $('label[for="passconfirm"]').html("<label for='passwordConfirm'></label>");
         }else{
             $('input#passconfirm').css("border", "2px solid red");
-            $('label[for="passconfirm"]').html("<label for='passwordConfirm'>Пароли не совпадают</label>");
+            $('label[for="passconfirm"]').html("<label for='passwordConfirm' class='redErr'>Пароли не совпадают</label>");
         }
 
         if(emailValidate(email)){
@@ -67,7 +67,7 @@ $(document).ready(function(){
             $('label[for="email"]').html("<label for='email'></label>");
         }else{
             $('input#email').css("border", "2px solid red");
-            $('label[for="email"]').html("<label for='email'>Неверный тип email</label>");
+            $('label[for="email"]').html("<label for='email' class='redErr'>Неверный тип email</label>");
         }
 
         if(nameValidate(name)){
@@ -75,7 +75,7 @@ $(document).ready(function(){
             $('label[for="name"]').html("<label for='name'></label>");
         }else{
             $('input#name').css("border", "2px solid red");
-            $('label[for="name"]').html("<label for='name'>Имя должно быть минимум 2 символа, только буквы</label>");
+            $('label[for="name"]').html("<label for='name' class='redErr'>Имя должно быть минимум 2 символа, только буквы</label>");
         }
 
         if(loginValidate(login) && passValidate(password) && passConfirmValidate(password, passConfirm) && emailValidate(email) & nameValidate(name)) {
@@ -98,12 +98,12 @@ $(document).ready(function(){
                     } else if (cdata.status === false) {
                         if (cdata.message == "User login exists"){
                             $('input#login').css("border", "2px solid red");
-                            $('label[for="login"]').html("<label for='login'>Пользователь с таким логином уже существует</label>");
+                            $('label[for="login"]').html("<label for='login' class='redErr'>Пользователь с таким логином уже существует</label>");
                         } else if (cdata.message == 'User email exists'){
                             $('input#email').css("border", "2px solid red");
-                            $('label[for="email"]').html("<label for='email'>Пользователь с таким email уже существует</label>");
+                            $('label[for="email"]').html("<label for='email' class='redErr'>Пользователь с таким email уже существует</label>");
                         } else {
-                            $('label#error').html("<label id='error'>Неверно введены данные</label>")
+                            $('label#error').html("<label id='error' class='redErr'>Неверно введены данные</label>")
 
                         }
                     };
@@ -139,10 +139,10 @@ $(document).ready(function(){
                 }else{
                     if(rdata.message === 'Wrong login'){
                         $('input#authLogin').css("border", "2px solid red");
-                        $('label[for="authLogin"]').html("<label for='authLogin'>Неверный логин</label>");
+                        $('label[for="authLogin"]').html("<label for='authLogin' class='redErr'>Неверный логин</label>");
                     }else if(rdata.message === 'Wrong password'){
                         $('input#authPassword').css("border", "2px solid red");
-                        $('label[for="authPassword"]').html("<label for='authPassword'>Неверный пароль</label>");
+                        $('label[for="authPassword"]').html("<label for='authPassword' class='redErr'>Неверный пароль</label>");
                     }
                 }
             }
@@ -154,28 +154,30 @@ $(document).ready(function(){
 
 function emailValidate(email){
     
-    var echeck = /^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}$/
+    var echeck = /^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}$/;
 
     return(echeck.test(email));
 }
 
 function nameValidate(name){
 
-    var nameCheck = /^[а-яА-ЯёЁa-zA-Z]+$/
+    var nameCheck = /^[\wа-яА-я]{2,}$/;
 
     return(nameCheck.test(name) && name.length >= 2);
 }
 
 function loginValidate(login){
 
-    return(login.length >= 6);
+    var loginCheck = /^[\w\d_]{6,20}$/;
+
+    return(loginCheck.test(login));
 }
 
 function passValidate(password){
 
-    var passCheck = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*$/
+    var passCheck = /^[\w\d]{6,}$/;
 
-    return(passCheck.test(password) && password.length >= 6);
+    return(passCheck.test(password));
 }
 
 function passConfirmValidate(password, passconfirm){

@@ -36,7 +36,7 @@ class Validation
 
     private function validatePassword(): bool
     {
-        return (bool)preg_match('/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*$/', $this->user['password']);
+        return (bool)preg_match('/^[\w\d]{6,}$/', $this->user['password']);
     }
 
     private function validatePasswordConfirm(): bool
