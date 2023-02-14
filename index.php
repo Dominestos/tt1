@@ -13,7 +13,7 @@ session_start();
     <script src="/assets/js/main.js"></script>
 </head>
 <body>
-    <form id="authorize" method="post" onsubmit="return false">
+    <form id="authorize" method="post" onsubmit="return false" style="display: none;">
         <h1>Вход</h1>
         <div class="input-form">
             <input type="text" id="authLogin" name="authLogin" placeholder="Логин" required>
@@ -29,7 +29,7 @@ session_start();
         <a href="" class="reg">Зарегистрироваться</a>
     </form>
 
-    <form id="register" method="post" onsubmit="return false">
+    <form id="register" method="post" onsubmit="return false" style="display: none;">
         <h1>Регистрация</h1>
         <div class="input-form">
             <input type="text" id="login" name="login" placeholder="Логин(уникальный)" required>
@@ -58,7 +58,7 @@ session_start();
         <a href="" class="auth">Авторизироваться</a>
     </form>
 
-    <form class="main">
+    <form class="main" style="display: none;">
         <h1 style="margin: 10%;" id="session">Hello <?=isset($_SESSION['name']) ? $_SESSION['name'] : ''?></h1>
         <a href="/exit.php" class="logout">Выход</a>
     </form>
