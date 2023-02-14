@@ -168,12 +168,12 @@ function nameValidate(name){
 
     var nameCheck = /^[\wа-яА-я]{2,}$/;
 
-    return(nameCheck.test(name) && name.length >= 2);
+    return(nameCheck.test(name));
 }
 
 function loginValidate(login){
 
-    var loginCheck = /^[\w\d_]{6,20}$/;
+    var loginCheck = /^[\w\d_]{6,}$/;
 
     return(loginCheck.test(login));
 }
